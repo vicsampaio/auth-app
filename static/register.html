@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Vicksys</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" />
+  </head>
+  <body>
+    <div id="root">
+      <form class="form">
+        <h1 class="title">Vicksys</h1>
+        <h2>Register</h2>
+        <input type="name" id="name" placeholder="Name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button>Register</button>
+        <a href="/login.html">Already registered? Click here to sign in</a>
+      </form>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+    const $ = (selector) => document.querySelector(selector);
+
+    $(".form").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const name = $("#name").value;
+      const email = $("#email").value;
+      const password = $("#password").value;
+
+      handleRegistration({
+        name,
+        email,
+        password,
+      });
+    });
+
+    const handleRegistration = async (credentials) => {
+      const { data } = await axios.post(
+        "http://localhost:5000/register",
+        credentials
+      );
+
+      window.location = "/login.html";
+    };
+  </script>
+</html>
